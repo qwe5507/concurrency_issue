@@ -14,8 +14,11 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
-    public void decrease(Long id, Long quantity) {
+    // 스프링의 @Transactional은 프록시 객체를 만든다.
+    // 프록시 객체의 타겟의 로직실행 -> 트랜잭션 종료 그 사이에 다른 요청의 타겟의 로직이 실행될 수 있다.
+    // 테스트 통과를 위해 @Transactional을 주석처리 한다.
+//    @Transactional
+    public synchronized void decrease(Long id, Long quantity) {
         // get stock
         // 재고 감소
         // 저장
