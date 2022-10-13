@@ -47,7 +47,7 @@ class StockServiceTest {
     @Test
     public void 동시에_100개의_요청() throws InterruptedException {
         int threadCount = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        ExecutorService executorService = Executors.newFixedThreadPool(32); //스레드풀 갯수 지정
         CountDownLatch latch = new CountDownLatch(threadCount);
 
         for (int i = 0; i < threadCount; i++) {
@@ -65,6 +65,6 @@ class StockServiceTest {
         Stock stock = stockRepository.findById(1L).orElseThrow();
 
         //예상 : 100 - (1 * 100) = 0
-        assertThat(stock.getQuantity()).isEqualTo(0);// 실패
+        assertThat(stock.getQuantity()).isEqualTo(0);
     }
 }
